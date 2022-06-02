@@ -1,5 +1,7 @@
 package com.generation.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,17 +20,15 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "O atributo nome não pode ser nulo e nem um espaço em branco!")
 	@Size(max = 100, message = "Deve conter no máximo 100 caracteres!")
 	private String nome;
-	
+
 	private String descricao;
-	
-	@NotBlank(message = "O atributo valor não pode  ser null nem vazio!")
-	@Size(min = 1,max = 10, message = "Deve conter algum valor")
-	private String valor;
-	
+
+	private BigDecimal valor;
+
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
 	private Categoria categoria;
@@ -57,11 +57,13 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public String getValor() {
+	
+
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
